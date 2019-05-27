@@ -19,6 +19,17 @@ const Options = ({
   const [option] = options.filter(item => item.id === selected)
   const included = includedAdditionally(option, additionallyOptions)
 
+  const handle = item => {
+    const options = [item.id, ...item.connect]
+    if (selectedAdditionally.includes(item.id)) {
+      handleAdditionallyOptions(
+        selectedAdditionally.filter(item => options.includes(item.id))
+      )
+    } else {
+      handleAdditionallyOptions([...selectedAdditionally, ...options])
+    }
+  }
+
   const items = additionallyOptions
     .map(item => {
       if (included.includes(item.id)) return null
@@ -30,16 +41,7 @@ const Options = ({
           name={item.name}
           amount={item.amount}
           caption={item.caption}
-          handle={() => {
-            const options = [item.id, ...item.connect]
-            if (selectedAdditionally.includes(item.id)) {
-              handleAdditionallyOptions(
-                selectedAdditionally.filter(item => options.includes(item.id))
-              )
-            } else {
-              handleAdditionallyOptions([...selectedAdditionally, ...options])
-            }
-          }}
+          handle={() => handle(item)}
           checked={selectedAdditionally.includes(item.id)}
         />
       )
