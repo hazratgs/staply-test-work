@@ -22,9 +22,12 @@
   overflow: hidden;
   padding: 10px 12px;
   border-bottom: 1px solid #e5e5e5;
+  color: #b6b6b5;
+}
+
+.field:nth-child(2) {
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #b6b6b5;
 }
 
 .fieldActive {
