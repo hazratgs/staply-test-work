@@ -3,7 +3,7 @@ import cn from 'classnames'
 import tableStyles from './Table.module.css'
 import Price from './Price'
 
-const Checkbox = ({ editable, name, amount, caption, checked }) => (
+const Checkbox = ({ id, editable, name, amount, caption, checked, handle }) => (
   <tr>
     <td
       className={cn(tableStyles.field, {
@@ -16,6 +16,7 @@ const Checkbox = ({ editable, name, amount, caption, checked }) => (
             className={tableStyles.input}
             type="checkbox"
             checked={checked}
+            onChange={() => handle(id)}
           />
         )}
         {name}

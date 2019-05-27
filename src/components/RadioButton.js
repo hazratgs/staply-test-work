@@ -4,13 +4,15 @@ import tableStyles from './Table.module.css'
 
 import Price from 'components/Price'
 
-const RadioButton = ({ radioOptions }) => (
-  <Fragment>
-    {radioOptions.map((option, index) => (
-      <tr key={option.name}>
+const RadioButton = ({ radioOptions, selected, handle }) => {
+  const items = radioOptions.map(option => {
+    const active = selected === option.id
+
+    return (
+      <tr key={option.id}>
         <td
           className={cn(tableStyles.field, {
-            [tableStyles.fieldActive]: !index,
+            [tableStyles.fieldActive]: active,
           })}
         >
           <label>
@@ -18,21 +20,24 @@ const RadioButton = ({ radioOptions }) => (
               className={tableStyles.input}
               name="tariff"
               type="radio"
-              checked={!index}
+              checked={active}
+              onChange={() => handle(option.id)}
             />
             {option.name}
           </label>
         </td>
         <td
           className={cn(tableStyles.field, tableStyles.rightField, {
-            [tableStyles.fieldActive]: !index,
+            [tableStyles.fieldActive]: active,
           })}
         >
           <Price amount={option.amount} caption={option.caption} />
         </td>
       </tr>
-    ))}
-  </Fragment>
-)
+    )
+  })
+
+  return <Fragment>{items}</Fragment>
+}
 
 export default RadioButton
